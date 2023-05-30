@@ -23,14 +23,23 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty] private Color _qrCodeBackgroundColor1 = Colors.White;
     [ObservableProperty] private Color _qrCodeBackgroundColor2 = Colors.White;
 
+    [ObservableProperty] private QrCode.EccLevel _qrCodeEccLevel;
+    
     private const string Chars = "qwertyuiopasdfghjklzxcvbnm";
 
     public MainViewModel() => ResetQrCode();
+
+    [RelayCommand]
+    private void UpdateQrCode(string text)
+    {
+        if (string.IsNullOrEmpty(text)) text = "You didn't put anything here?";
+        QrCodeString = text;
+    }
     
     [RelayCommand]
     private void RandomizeData()
     {
-        QrCodeString = string.Join("", Enumerable.Range(0, 150).Select(_ => Chars[Random.Shared.Next(0, Chars.Length)]));
+        UpdateQrCode(string.Join("", Enumerable.Range(0, 150).Select(_ => Chars[Random.Shared.Next(0, Chars.Length)])));
     }
     
     [RelayCommand]
@@ -49,6 +58,8 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     private void ResetQrCode()
     {
+        QrCodeEccLevel = QrCode.EccLevel.Medium;
+        
         QrCodeString = "I'm a very long text that you might find somewhere as a link or something else.  It's rendered with smooth edges and gradients for the foreground and background";
         
         QrCodeForegroundColor1 = Colors.Navy;

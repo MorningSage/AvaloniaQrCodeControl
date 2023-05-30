@@ -3,8 +3,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AvaloniaQrCodeControl"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        Width="800" Height="450"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+        Width="800" Height="600"
         x:Class="AvaloniaQrCodeControl.MainWindow"
         x:DataType="local:MainViewModel"
         Title="AvaloniaQrCodeControl"
@@ -34,6 +34,7 @@
                 Padding="{Binding QrCodePadding}"
                 Data="{Binding QrCodeString}"
                 CornerRadius="{Binding QrCodeCornerRadius}"
+                ErrorCorrection="{Binding QrCodeEccLevel}"
             >
             
                 <local:QrCode.Foreground>
@@ -51,10 +52,21 @@
                 </local:QrCode.Background>
             </local:QrCode>
             
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                <Label Content="QRCode Data:" VerticalAlignment="Center"/>
+                <TextBox Name="QrDataBox" Width="{Binding QrCodeSize}" Text="{Binding QrCodeString, Mode=TwoWay}" />
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                <Label Content="ECC Level:" VerticalAlignment="Center"/>
+                <ComboBox Name="EccLevelComboBox" Width="{Binding QrCodeSize}" SelectedItem="{Binding QrCodeEccLevel, Mode=TwoWay}" />
+            </StackPanel>
+            
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="10">
                 <Button Content="Randomize Data" Command="{Binding RandomizeDataCommand}" />
                 <Button Content="Randomize Colors" Command="{Binding RandomizeColorsCommand}" />
             </StackPanel>
+            
             <Button Content="Reset QRCode" HorizontalAlignment="Center" Command="{Binding ResetQrCodeCommand}" />
         </StackPanel>
     </Panel>
