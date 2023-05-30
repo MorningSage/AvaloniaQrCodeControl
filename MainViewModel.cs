@@ -17,11 +17,11 @@ public partial class MainViewModel : ObservableObject
     
     [ObservableProperty] private CornerRadius _qrCodeCornerRadius = new(12);
 
-    [ObservableProperty] private Color _qrCodeForegroundColor1 = Colors.Navy;
-    [ObservableProperty] private Color _qrCodeForegroundColor2 = Colors.DarkRed;
+    [ObservableProperty] private Color _qrCodeForegroundColor1;
+    [ObservableProperty] private Color _qrCodeForegroundColor2;
     
-    [ObservableProperty] private Color _qrCodeBackgroundColor1 = Colors.White;
-    [ObservableProperty] private Color _qrCodeBackgroundColor2 = Colors.White;
+    [ObservableProperty] private Color _qrCodeBackgroundColor1;
+    [ObservableProperty] private Color _qrCodeBackgroundColor2;
 
     [ObservableProperty] private QrCode.EccLevel _qrCodeEccLevel;
     
