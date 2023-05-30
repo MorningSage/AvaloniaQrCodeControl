@@ -1,0 +1,62 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AvaloniaQrCodeControl"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        Width="800" Height="450"
+        x:Class="AvaloniaQrCodeControl.MainWindow"
+        x:DataType="local:MainViewModel"
+        Title="AvaloniaQrCodeControl"
+        Background="Transparent"
+        TransparencyLevelHint="Blur"
+>
+
+    <Design.DataContext>
+        <local:MainViewModel />
+    </Design.DataContext>
+    
+    <Panel>
+        <ExperimentalAcrylicBorder IsHitTestVisible="False" IsVisible="True">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="#FF000000"
+                    TintOpacity="1"
+                    FallbackColor="Black"
+                    MaterialOpacity="0.65" />
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+            
+        <StackPanel VerticalAlignment="Center" Spacing="10">
+            <local:QrCode
+                Width="{Binding QrCodeSize}" Height="{Binding QrCodeSize}" 
+                Padding="{Binding QrCodePadding}"
+                Data="{Binding QrCodeString}"
+                CornerRadius="{Binding QrCodeCornerRadius}"
+            >
+            
+                <local:QrCode.Foreground>
+                    <LinearGradientBrush>
+                        <GradientStop Offset="0" Color="{Binding QrCodeForegroundColor1}" />
+                        <GradientStop Offset="1" Color="{Binding QrCodeForegroundColor2}" />
+                    </LinearGradientBrush>
+                </local:QrCode.Foreground>
+                
+                <local:QrCode.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Offset="0" Color="{Binding QrCodeBackgroundColor1}" />
+                        <GradientStop Offset="1" Color="{Binding QrCodeBackgroundColor2}" />
+                    </LinearGradientBrush>
+                </local:QrCode.Background>
+            </local:QrCode>
+            
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="10">
+                <Button Content="Randomize Data" Command="{Binding RandomizeDataCommand}" />
+                <Button Content="Randomize Colors" Command="{Binding RandomizeColorsCommand}" />
+            </StackPanel>
+            <Button Content="Reset QRCode" HorizontalAlignment="Center" Command="{Binding ResetQrCodeCommand}" />
+        </StackPanel>
+    </Panel>
+        
+</Window>
